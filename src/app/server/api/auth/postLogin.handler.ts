@@ -2,9 +2,9 @@ import { In_postLogin, Out_postLogin } from 'app/shared/auth/postLogin.endpoint'
 import { Result } from 'requests-utils/result.types';
 
 export const handler_postLogin = async (payload: In_postLogin): Result<Out_postLogin> => {
-  const { username, password } = payload;
+  const { email, password } = payload;
 
-  if (username !== 'Fusion') {
+  if (email !== 'fusion@gmail.com') {
     return { error: { status: 401, message: "Cet utilisateur n'existe pas" } };
   }
 

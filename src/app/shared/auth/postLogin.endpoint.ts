@@ -3,7 +3,7 @@ import { makeClientForEndpoint } from 'requests-utils/client';
 
 export const path_postLogin = '/api/login/';
 
-export type In_postLogin = { password: string; username: string };
+export type In_postLogin = { password: string; email: string };
 export type Out_postLogin = { jwtToken: string };
 
 export const endpoint_postLogin = {
