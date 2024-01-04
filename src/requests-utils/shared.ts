@@ -4,7 +4,7 @@ import { In_sendMessage, Out_sendMessage } from 'app/shared/messaging/sendMessag
 import { In_postSignUp, Out_postSignUp } from 'app/shared/auth/postSignUp.endpoint';
 
 type HandlerPostLogin = (payload: In_postLogin) => Result<Out_postLogin>;
-type HandlerSendMessage = (payload: In_sendMessage) => Result<Out_sendMessage | Out_postLogin>;
+type HandlerSendMessage = (payload: In_sendMessage) => Result<Out_sendMessage>;
 type handlerSignUp = (payload: In_postSignUp) => Result<Out_postSignUp>;
 export type Endpoint = {
   path: string;

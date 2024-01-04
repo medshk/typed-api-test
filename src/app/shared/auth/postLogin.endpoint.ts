@@ -11,4 +11,4 @@ export const endpoint_postLogin = {
   handler: handler_postLogin, // maybe you noticed here that there is a circular import. It's required for simplicity sake in this exercice, don't worry too much about it.
 };
 
-export const client_postLogin = makeClientForEndpoint(endpoint_postLogin);
+export const client_postLogin = makeClientForEndpoint<Out_postLogin>(endpoint_postLogin);

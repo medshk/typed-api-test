@@ -5,6 +5,7 @@ import { client_sendMessage } from 'app/shared/messaging/sendMessage.endpoint';
 
 import { handleError } from './handleError';
 import { client_postSignUp } from 'app/shared/auth/postSignUp.endpoint';
+import { Err } from 'requests-utils/result.types';
 
 // in a React App, it would look like
 // <Button onClick={getAccessToken(form.name.value, form.password.value)}>Se connecter</Button>;
@@ -33,10 +34,11 @@ const getAccessToken = async (username: string, password: string) => {
       username,
       password,
     });
-    if (!data.jwtToken) {
-      throw Error(data.response.data);
+    if ('jwtToken' in data) {
+      console.log('successful login:', data.jwtToken);
+    } else {
+      throw Error((data as Err).message);
     }
-    console.log('Successful login ! Token:', data.jwtToken);
   } catch (error) {
     handleError(error);
   }
@@ -48,10 +50,11 @@ const sendMessage = async (toPhoneNumber: string, content: string) => {
       toPhoneNumber,
       content,
     });
-    if (!data.toPhoneNumber) {
-      throw Error(data.response.data);
+    if ('toPhoneNumber' in data) {
+      console.log('Message sent ! Message:', data);
+    } else {
+      throw Error((data as Err).message);
     }
-    console.log('Message sent ! Message:', data);
   } catch (error) {
     handleError(error);
   }
@@ -66,10 +69,11 @@ const signUp = async (username: string, password: string, email: string) => {
       password,
       email,
     });
-    if (!data.jwtToken) {
-      throw Error(data.response.data);
+    if ('jwtToken' in data) {
+      console.log('successful signup! :', data.jwtToken);
+    } else {
+      throw Error((data as Err).message);
     }
-    console.log('Successful sign up ! Token::', data.jwtToken);
   } catch (error) {
     handleError(error);
   }
