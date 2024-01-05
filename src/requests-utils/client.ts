@@ -6,13 +6,13 @@ import { Err, Result } from './result.types';
 
 type Payload = Record<string, string>;
 
-export const makeClientForEndpoint = <T extends object>(ep: Endpoint) => ({
+export const makeClientForEndpoint = <T extends (...args: any[]) => any>(ep: Endpoint<T>) => ({
   fire: async (payload: Payload): Promise<T | Err> => {
     // TODO. You can use axios which is already installed.
     // Let's say all endpoints use POST method for now.
     try {
       const response: AxiosResponse = await axios.post(baseURL + ep.path, payload);
-      return response.data as Promise<T>;
+      return response.data as T;
     } catch (error) {
       return error as Err;
     }

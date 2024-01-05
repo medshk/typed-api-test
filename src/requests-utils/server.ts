@@ -1,9 +1,12 @@
-import { Express, NextFunction, RequestHandler, response } from 'express';
+import { Express, NextFunction } from 'express';
 
-import { isError, Result, Err } from './result.types';
+import { isError } from './result.types';
 import { Endpoint } from './shared';
 
-export const setupEndpoint = (app: Express, endpoint: Endpoint) => {
+export const setupEndpoint = <T extends (...args: any[]) => any>(
+  app: Express,
+  endpoint: Endpoint<T>
+) => {
   app.post(endpoint.path, async (req, res, next: NextFunction) => {
     const response = await endpoint.handler(req.body);
     if ('error' in response && isError(response)) {
