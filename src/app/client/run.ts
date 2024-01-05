@@ -28,10 +28,10 @@ const run = async () => {
 
 //
 
-const getAccessToken = async (username: string, password: string) => {
+const getAccessToken = async (email: string, password: string) => {
   try {
     const data = await client_postLogin.fire({
-      username,
+      email,
       password,
     });
     if ('jwtToken' in data) {
